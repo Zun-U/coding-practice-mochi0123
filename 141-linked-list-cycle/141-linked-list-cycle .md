@@ -119,6 +119,48 @@ func hasCycle(head *ListNode) bool {
 自然に覚えられたと思います。
 
 
+- フロイドの循環検出法
+```go
+func hasCycle(head *ListNode) bool {
+
+	fast := head
+	slow := head
+
+	if head != nil {
+
+		fast := fast.Next.Next
+		slow := slow.Next
+
+		if fast == slow {
+			return ture
+		}
+	}
+
+	return false
+}
+```
+
+- map(set)を使用した解法
+```go
+func hasCycle(head *ListNode) bool {
+
+	nodes := make(map[*ListNode]bool)
+
+	if head != nil {
+
+		_, ok := nodes[head]
+		if ok {
+			return true
+		}
+
+		nodes[head] = true
+		head := head.Next
+	}
+
+	return false
+}
+```
+
 
 ## STEP4
 オリジナルの手順として、ベンチマークの計測を行いました。
@@ -166,3 +208,34 @@ ok      bench   1.646s
 もっと大きいnのケースであれば、大体同じくらいの時間になるのでしょうか。
 
 組み込みのテスト関数の内部は調べてみたいと思いました。
+
+
+## STEP5
+レビューをもとに修正してみました。
+
+
+```go
+func hasCycle(head *ListNode) bool {
+
+	// あらかじめ要素の個数が分かっている場合は、サイズを指定する
+	// 今回は要素の個数が分からないため、サイズを指定しない（サイズは0になる）
+	nodes := make(map[*ListNode]bool)
+
+	// headはあくまでnodeの先頭を意味するため、別に変数を作りそちらを動かす
+	visited := head
+
+	// ループの条件として、head.Next != nil は必須ではないため、省略
+	for head != nil {
+
+		_, ok := nodes[visited]
+		if ok {
+			return true
+		}
+
+		nodes[visited] = true
+		visited = head.Next
+	}
+
+	return false
+}
+```

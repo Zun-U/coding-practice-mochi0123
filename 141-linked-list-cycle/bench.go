@@ -27,9 +27,9 @@ func HasCyclePointer(head *ListNode) bool {
 // map(set)による検出法
 func HasCycleMap(head *ListNode) bool {
 
-	nodes := make(map[*ListNode]bool, 0)
+	nodes := make(map[*ListNode]bool)
 
-	for head != nil && head.Next != nil {
+	for head != nil {
 
 		// カンマokイディオムを使用する
 		// 「ok」以外の変数名も可能だが、Goのイディオムに従う
