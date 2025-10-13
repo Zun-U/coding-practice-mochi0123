@@ -24,7 +24,6 @@
  * }
  */
 func hasCycle(head *ListNode) bool {
-
 	if head == nil {
 		return false
 	}
@@ -61,12 +60,10 @@ LeetCodeの他の解答を見つつ、変更した点は下記の通りです。
 
 ```Go
 func hasCycle(head *ListNode) bool {
-
 	fast := head
 	slow := head
 
 	for fast != nil && fast.Next != nil {
-
 		fast = fast.Next.Next
 		slow = slow.Next
 
@@ -83,11 +80,9 @@ func hasCycle(head *ListNode) bool {
 
 ```Go
 func hasCycle(head *ListNode) bool {
-
 	nodes := make(map[*ListNode]bool, 0)
 
 	for head != nil && head.Next != nil {
-
 		// カンマokイディオムを使用する
 		// 「ok」以外の変数名も可能だが、Goのイディオムに従う
 		_, ok := nodes[head]
@@ -122,12 +117,10 @@ func hasCycle(head *ListNode) bool {
 - フロイドの循環検出法
 ```go
 func hasCycle(head *ListNode) bool {
-
 	fast := head
 	slow := head
 
 	if head != nil {
-
 		fast := fast.Next.Next
 		slow := slow.Next
 
@@ -143,11 +136,9 @@ func hasCycle(head *ListNode) bool {
 - map(set)を使用した解法
 ```go
 func hasCycle(head *ListNode) bool {
-
 	nodes := make(map[*ListNode]bool)
 
 	if head != nil {
-
 		_, ok := nodes[head]
 		if ok {
 			return true
@@ -224,8 +215,8 @@ func hasCycle(head *ListNode) bool {
 	// headはあくまでnodeの先頭を意味するため、別に変数を作りそちらを動かす
 	visited := head
 
-	// ループの条件として、head.Next != nil は必須ではないため、省略
-	for head != nil {
+	// ループの条件として、visited.Next != nil は必須ではないため、省略
+	for visited != nil {
 
 		_, ok := nodes[visited]
 		if ok {
@@ -233,7 +224,7 @@ func hasCycle(head *ListNode) bool {
 		}
 
 		nodes[visited] = true
-		visited = head.Next
+		visited = visited.Next
 	}
 
 	return false
