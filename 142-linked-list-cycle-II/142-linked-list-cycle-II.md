@@ -215,3 +215,65 @@ ok      bench   1.809s
 
 - 参考資料  
 [GopherCon 2016: Inside the Map Implementation - Keith Randall](https://www.youtube.com/watch?v=Tl7mi9QmLns&list=PLnPR191a_BqY1D5n4An5gfQf-LhHclKlS&index=75)
+
+
+## STEP5
+いただいたレビューをもとに修正しました。
+
+- map(set)を使用した解法
+  - `current`を`node`に変数名変更
+```go
+func detectCycle(head *ListNode) *ListNode {
+	visited := make(map[*ListNode]bool)
+	node := head
+
+	for node != nil {
+		_, ok := visited[node]
+		if ok {
+			return node
+		}
+
+		visited[node] = true
+		node = node.Next
+	}
+
+	return nil
+}
+```
+
+
+- フロイドの循環検出法
+  - リストの循環検出部分を関数化する
+```go
+
+func hasCycle(head *ListNode) *ListNode {
+	fast := head
+	slow := head
+
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+
+		if fast == slow {
+			return fast
+		}
+	}
+
+	return nil
+}
+
+func detectCycle(head *ListNode) *ListNode {
+	meetingNode := hasCycle(head)
+	if meetingNode == nil {
+		return nil
+	}
+
+	fromHead    := head
+	fromMeeting := meetingNode
+	for fromHead != fromMeeting {
+		fromHead    = fromHead.Next
+		fromMeeting = fromMeeting.Next
+	}
+	return fromHead
+}
+```
