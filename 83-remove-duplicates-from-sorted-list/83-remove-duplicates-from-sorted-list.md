@@ -60,7 +60,6 @@ func insert(l *ListNode, v int) *ListNode {
 順序が保証されていないのであれば、「slices.Compact」の前に「slices.Sort」で箱の中身をソートかけると思います。
 
 また、再帰関数は読み解くのに認知負荷が高いと思いました。（自分が例を見て理解するのに時間がかかった為）  
-この段階では、
 
 
 ## STEP2
@@ -139,5 +138,6 @@ ok  	bench	1.633s
 
 - BenchmarkDeleteDuplicates-8  
   ベンチマーク名 - ベンチマークのGOMAXPROCSの値
+
 
 
