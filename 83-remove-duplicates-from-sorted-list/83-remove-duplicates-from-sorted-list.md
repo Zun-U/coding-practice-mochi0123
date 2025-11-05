@@ -139,3 +139,4 @@ ok  	bench	1.633s
   ベンチマーク名 - ベンチマークのGOMAXPROCSの値
 
 
+
