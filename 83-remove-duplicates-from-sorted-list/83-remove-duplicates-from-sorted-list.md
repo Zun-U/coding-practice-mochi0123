@@ -22,12 +22,11 @@
  *     Next *ListNode
  * }
  */
-
 import "slices"
 
 func deleteDuplicates(head *ListNode) *ListNode {
 	var newList *ListNode
-	node       := head
+	node := head
 	sortedList := make([]int, 0)
 
 	for node != nil {
@@ -51,7 +50,7 @@ func insert(l *ListNode, v int) *ListNode {
 
 	l.Next = insert(l.Next, v)
 
-  return l
+	return l
 }
 ```
 
@@ -60,7 +59,6 @@ func insert(l *ListNode, v int) *ListNode {
 順序が保証されていないのであれば、「slices.Compact」の前に「slices.Sort」で箱の中身をソートかけると思います。
 
 また、再帰関数は読み解くのに認知負荷が高いと思いました。（自分が例を見て理解するのに時間がかかった為）  
-この段階では、
 
 
 ## STEP2
@@ -71,17 +69,17 @@ func insert(l *ListNode, v int) *ListNode {
 
 ```Go
 func deleteDuplicates(head *ListNode) *ListNode {
-  sorted := head
+	sorted := head
 
-  for sorted != nil && sorted.Next != nil {
-    if sorted.Val == sorted.Next.Val {
+	for sorted != nil && sorted.Next != nil {
+		if sorted.Val == sorted.Next.Val {
 			sorted.Next = sorted.Next.Next
 			continue
-    }
-    sorted = sorted.Next
-  }
+		}
+		sorted = sorted.Next
+	}
 
-  return head
+	return head
 }
 ```
 

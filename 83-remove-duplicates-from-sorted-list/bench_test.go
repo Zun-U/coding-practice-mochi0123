@@ -19,15 +19,15 @@ const (
 func makeList(size int) *ListNode {
 	var nodeValue int
 	nodes := make([]*ListNode, size)
-	list  := make([]int, 0)
+	list := make([]int, 0)
 
 	// シード値の設定
 	rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	for i := 0; i < size; i++ {
 		// 半開区間[0,201)の乱数(0~200の間) - 100
-		nodeValue = rand.Intn(MAXVALUE - MINVALUE + 1) + MINVALUE
-		list      = append(list, nodeValue)
+		nodeValue = rand.Intn(MAXVALUE-MINVALUE+1) + MINVALUE
+		list = append(list, nodeValue)
 	}
 
 	slices.Sort(list)
